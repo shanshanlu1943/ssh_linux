@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import paramiko
 import os
+import sys
 
 #当前脚本路径
 CUR_PATH = os.path.dirname(__file__)
@@ -12,13 +13,32 @@ Port=22
 Username='root'
 #登录密码
 Password='Jayking0216'
-#登录服务器后执行的命令
-Command = ['cd /usr/ESandTable/web/web-resource/web/cchj; rm -rf *']
-Command_tar = ['cd /usr/ESandTable/web/web-resource/web/cchj; tar -vxf h5demo.tar']
-#本地PC路径
-WinPath = CUR_PATH + '\\h5demo.tar'
-#服务器上的路径
-LinuxPath = '/usr/ESandTable/web/web-resource/web/cchj/h5demo.tar'
+
+if sys.argv[1] == '0':
+    #登录服务器后执行的命令
+    Command = ['cd /usr/ESandTable/web/web-resource/web/cchj; rm -rf index.html;rm -rf resources;rm -rf h5demo.tar;']
+    Command_tar = ['cd /usr/ESandTable/web/web-resource/web/cchj; tar -vxf h5demo.tar']
+    #本地PC路径
+    WinPath = CUR_PATH + '\\h5demo.tar'
+    #服务器上的路径
+    LinuxPath = '/usr/ESandTable/web/web-resource/web/cchj/h5demo.tar'
+elif sys.argv[1] == '1':
+    #登录服务器后执行的命令
+    Command = ['cd /usr/ESandTable/web/web-resource/web/cchj/pad; rm -rf *']
+    Command_tar = ['cd /usr/ESandTable/web/web-resource/web/cchj/pad; tar -vxf pad.tar']
+    #本地PC路径
+    WinPath = CUR_PATH + '\\pad.tar'
+    #服务器上的路径
+    LinuxPath = '/usr/ESandTable/web/web-resource/web/cchj/pad/pad.tar'
+elif sys.argv[1] == '2':
+    #登录服务器后执行的命令
+    Command = ['cd /usr/ESandTable/web/web-resource/web/wdsy; rm -rf *']
+    Command_tar = ['cd /usr/ESandTable/web/web-resource/web/wdsy; tar -vxf wdsy.tar']
+    #本地PC路径
+    WinPath = CUR_PATH + '\\wdsy.tar'
+    #服务器上的路径
+    LinuxPath = '/usr/ESandTable/web/web-resource/web/wdsy/wdsy.tar'
+
 
 def ssh_exec_cmd(command):
     '''SSHA远程登录：Windows客户端连接Linux服务器，并输入指令'''
